@@ -30,10 +30,10 @@ function orderAlphabetically(array) {
 
 // Exercise 5: Order by year, ascending
 function orderByYear(array) {
-  let result =  array.sort(function (a, b) {
+  let result =  [...array].sort(function (a, b) {
     // Sort by year
-    if (a.year > b.year) return -1;
-    if (a.year < b.year) return 1;
+    if (a.year > b.year) return 1;
+    if (a.year < b.year) return -1;
   
     // If the year number is the same, sort alphabetically
     if (a.title > b.title) return 1;
