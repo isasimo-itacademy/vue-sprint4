@@ -1,33 +1,54 @@
 // Exercise 1: Get the array of all directors.
 function getAllDirectors(array) {
-  let result =  ???;
-  console.log("EXERCICE 1 ->", result);
+  let result =  array.map(movie => movie.director);
   return result;
 }
 
 // Exercise 2: Get the films of a certain director
 function getMoviesFromDirector(array, director) {
- 
+  let result =  array.filter(movie => movie.director == director);
+  return result;
 }
 
 // Exercise 3: Calculate the average of the films of a given director.
 function moviesAverageOfDirector(array, director) {
-  
+  let totalscores =  array
+                      .filter(movie => movie.director == director)
+                      .map(movie => movie.score);
+  let result =  parseFloat(totalscores.reduce((a, b) => a + b/ totalscores.length ,0).toFixed(2));
+  return result;
 }
 
 // Exercise 4:  Alphabetic order by title 
 function orderAlphabetically(array) {
-  
+  let titles =  array.map(movie => movie.title);
+  let result =  titles
+                  .sort()
+                  .slice(0, 20);
+  return result;
 }
 
 // Exercise 5: Order by year, ascending
-function orderByYear() {
-
+function orderByYear(array) {
+  let result =  [...array].sort(function (a, b) {
+    // Sort by year
+    if (a.year > b.year) return 1;
+    if (a.year < b.year) return -1;
+  
+    // If the year number is the same, sort alphabetically
+    if (a.title > b.title) return 1;
+    if (a.title < b.title) return -1;
+  });
+  return result;
 }
 
 // Exercise 6: Calculate the average of the movies in a category
-function moviesAverageByCategory() {
-
+function moviesAverageByCategory(array, category) {
+  let totalscores =  array
+                      .filter(movie => movie.genre == category)
+                      .map(movie => movie.score);
+  let result =  parseFloat(totalscores.reduce((a, b) => a + b/ totalscores.length ,0).toFixed(2));
+  return result;
 }
 
 // Exercise 7: Modify the duration of movies to minutes
