@@ -29,13 +29,27 @@ function orderAlphabetically(array) {
 }
 
 // Exercise 5: Order by year, ascending
-function orderByYear() {
-
+function orderByYear(array) {
+  let result =  array.sort(function (a, b) {
+    // Sort by year
+    if (a.year > b.year) return -1;
+    if (a.year < b.year) return 1;
+  
+    // If the year number is the same, sort alphabetically
+    if (a.title > b.title) return 1;
+    if (a.title < b.title) return -1;
+  });
+  return result;
 }
 
 // Exercise 6: Calculate the average of the movies in a category
-function moviesAverageByCategory() {
-
+function moviesAverageByCategory(array, category) {
+  //let result =  array.filter(movie => movie.genre == category);
+  let totalscores =  array
+                      .filter(movie => movie.genre == category)
+                      .map(movie => movie.score);
+  let result =  totalscores.reduce((a, b) => a + b/ totalscores.length ,0).toFixed(2);
+  return result;
 }
 
 // Exercise 7: Modify the duration of movies to minutes
