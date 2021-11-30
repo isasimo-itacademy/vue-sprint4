@@ -44,7 +44,6 @@ function orderByYear(array) {
 
 // Exercise 6: Calculate the average of the movies in a category
 function moviesAverageByCategory(array, category) {
-  //let result =  array.filter(movie => movie.genre == category);
   let totalscores =  array
                       .filter(movie => movie.genre == category)
                       .map(movie => movie.score);
