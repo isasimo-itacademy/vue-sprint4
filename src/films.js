@@ -15,7 +15,7 @@ function moviesAverageOfDirector(array, director) {
   let totalscores =  array
                       .filter(movie => movie.director == director)
                       .map(movie => movie.score);
-  let result =  Math.floor(totalscores.reduce((a, b) => a + b/ totalscores.length ,0).toFixed(2));
+  let result =  parseFloat(totalscores.reduce((a, b) => a + b/ totalscores.length ,0).toFixed(2));
   return result;
 }
 
@@ -47,7 +47,7 @@ function moviesAverageByCategory(array, category) {
   let totalscores =  array
                       .filter(movie => movie.genre == category)
                       .map(movie => movie.score);
-  let result =  Math.floor(totalscores.reduce((a, b) => a + b/ totalscores.length ,0).toFixed(2));
+  let result =  parseFloat(totalscores.reduce((a, b) => a + b/ totalscores.length ,0).toFixed(2));
   return result;
 }
 
