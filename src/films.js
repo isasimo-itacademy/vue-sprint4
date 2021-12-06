@@ -56,7 +56,7 @@ function moviesAverageByCategory(array, category) {
 // Exercise 7: Modify the duration of movies to minutes
 function hoursToMinutes(array) {
   let result = JSON.parse(JSON.stringify(array));
-  
+
   result.map(function (movie) {
     let match = movie.duration.match(/\d+/g).map(Number);
     let hours = 0;
@@ -75,10 +75,12 @@ function hoursToMinutes(array) {
 
 // Exercise 8: Get the best film of a year
 function bestFilmOfYear(array, year) {
-  let result = [...array]
-                    .filter(movie => movie.year == year)
+  let bestyear = [...array]
+                    .filter(movie => movie.year === year)
                     .sort(movie => Math.max(movie.score));
-  return result[0];
+                    
+  let result = [bestyear.shift()];
+  return result;
 }
 
 
