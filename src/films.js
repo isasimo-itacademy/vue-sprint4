@@ -48,26 +48,28 @@ function moviesAverageByCategory(array, category) {
                       .filter(movie => {
                         if (movie.genre.includes(category) && (movie.score !== "")) return true; // case sensitive
                       })
-                      .map(movie => movie.score === '' ? 0 : movie.score);
-                      console.log(totalscores);
+                      .map(movie => movie.score);
   let result = parseFloat(totalscores.reduce((a, b) => a + b / totalscores.length, 0).toFixed(2));
   return result;
 }
 
 // Exercise 7: Modify the duration of movies to minutes
 function hoursToMinutes(array) {
-  let result = [...array];
-
-  for (let key in result) {
-    let rawduration = result[key].duration;
-    let match = rawduration.match(/\d+/g).map(Number);
-    
-    let hours = match[0] * 60;
-    let minutes = match[1];
-    result[key].duration = hours + minutes;
-    //console.log(result[key].duration);
-  }
+  let result = JSON.parse(JSON.stringify(array));
   
+  result.map(function (movie) {
+    let match = movie.duration.match(/\d+/g).map(Number);
+    let hours = 0;
+    let minutes = 0;
+    if (match[0]) {
+      hours = match[0] * 60;
+    }
+    if (match[1]) {
+      minutes = match[1];
+    }
+    movie.duration = hours + minutes;
+  });
+
   return result;
 }
 
