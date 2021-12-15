@@ -45,34 +45,48 @@ function orderByYear(array) {
 // Exercise 6: Calculate the average of the movies in a category
 function moviesAverageByCategory(array, category) {
   let totalscores = array
-                      .filter(movie => movie.genre == category)
+                      .filter(movie => {
+                        if (movie.genre.includes(category) && (movie.score !== "")) return true; // case sensitive
+                      })
                       .map(movie => movie.score);
-  let result = parseFloat(totalscores.reduce((a, b) => a + b/ totalscores.length ,0).toFixed(2));
+  let result = parseFloat(totalscores.reduce((a, b) => a + b / totalscores.length, 0).toFixed(2));
   return result;
 }
 
 // Exercise 7: Modify the duration of movies to minutes
 function hoursToMinutes(array) {
-  let result = [...array];
+  let result = JSON.parse(JSON.stringify(array));
 
-  for (let key in result) {
-    let rawduration = result[key].duration;
-    let match = rawduration.match(/\d+/g).map(Number);
-    
-    let hours = match[0] * 60;
-    let minutes = match[1];
-    result[key].duration = hours + minutes;
-    //console.log(result[key].duration);
-  }
-  
+  result.map(function (movie) {
+    let match = movie.duration.match(/\d+/g).map(Number);
+    let hours = 0;
+    let minutes = 0;
+    if (match[0]) {
+      hours = match[0] * 60;
+    }
+    if (match[1]) {
+      minutes = match[1];
+    }
+    movie.duration = hours + minutes;
+  });
+
   return result;
 }
 
 // Exercise 8: Get the best film of a year
-function bestFilmOfYear() {
-  
-}
+function bestFilmOfYear(array, year) {
+  let filteryear = [...array].filter(movie => movie.year === year);
 
+  let bestscore = filteryear
+                      .map(movie => movie.score)
+                      .reduce(function(a, b) {
+                        return Math.max(a, b);
+                      }, 0);                    
+  
+  let result = filteryear.filter(movie => movie.score === bestscore);
+
+  return result;
+}
 
 
 // The following is required to make unit tests work.
